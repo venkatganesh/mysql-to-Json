@@ -15,7 +15,7 @@
 #define SERVER "127.0.0.1"
 #define USERNAME "Test"
 #define PASSWORD "password"
-#define DATABASES "Milan"
+#define DATABASES "Test"
 
 void finish_with_error(MYSQL *con)
 {
@@ -55,8 +55,8 @@ int main() {
 	MYSQL_FIELD *field;
 	cJSON* root;
 	cJSON* subfld;
-	char *f_name[100];
-
+	char f_name[100][100];
+	int j=0;
 	struct connection_details mysqlD;
 	mysqlD.server = SERVER;  // where the mysql database is
 	mysqlD.user = USERNAME;		// the root user of mysql
@@ -67,7 +67,7 @@ int main() {
 	conn = mysql_connection_setup(mysqlD);
 
 	// assign the results return to the MYSQL_RES pointer
-	res = mysql_perform_query(conn, "select * from Lighting");
+	res = mysql_perform_query(conn, "select * from Test");
 
 	int num_fields = mysql_num_fields(res);
 	int i;
@@ -77,13 +77,11 @@ int main() {
 		cJSON_AddItemToArray(root, subfld = cJSON_CreateObject());
 		for (i = 0; i < num_fields; i++) {
 			while ((field = mysql_fetch_field(res))) {
-				int j=0;
-				f_name[j]=field->name;
+				strcpy(f_name[j],field->name);
 				j++;
-				//printf("%s ", f_name[j]);
 			}
-			cJSON_AddStringToObject(subfld, f_name[0], row[i] ? row[i] : "");
-
+			cJSON_AddStringToObject(subfld,f_name[i], row[i] ? row[i] : "");
+			j--;
 		}
 	}
 

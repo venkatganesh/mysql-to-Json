@@ -15,7 +15,7 @@
 #define SERVER "127.0.0.1"
 #define USERNAME "Test"
 #define PASSWORD "password"
-#define DATABASES "Test"
+#define DATABASES "Milan"
 
 void finish_with_error(MYSQL *con)
 {
@@ -28,9 +28,7 @@ MYSQL* mysql_connection_setup(struct connection_details mysql_details) {
 	MYSQL *connection = mysql_init(NULL );
 
 	// connect to the database with the details attached.
-	if (!mysql_real_connect(connection, mysql_details.server,
-			mysql_details.user, mysql_details.password, mysql_details.database,
-			0, NULL, 0)) {
+	if (!mysql_real_connect(connection, mysql_details.server,mysql_details.user, mysql_details.password, mysql_details.database,0, NULL, 0)) {
 		printf("Conection error : %s\n", mysql_error(connection));
 		//exit(1);
 	}
@@ -67,7 +65,7 @@ int main() {
 	conn = mysql_connection_setup(mysqlD);
 
 	// assign the results return to the MYSQL_RES pointer
-	res = mysql_perform_query(conn, "select * from Test");
+	res = mysql_perform_query(conn, "select * from Scene1");
 
 	int num_fields = mysql_num_fields(res);
 	int i;
@@ -81,7 +79,6 @@ int main() {
 				j++;
 			}
 			cJSON_AddStringToObject(subfld,f_name[i], row[i] ? row[i] : "");
-			j--;
 		}
 	}
 

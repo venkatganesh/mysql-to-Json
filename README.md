@@ -3,10 +3,9 @@
 
 
 
-
 #Requirements
 
-This Program is used mysql client library if you are using Ubuntu apt-get install libmysqlcient-dev
+This Program is used mysql client library if you are using Ubuntu apt-get install libmysqlclient-dev
 
 
 
@@ -15,5 +14,5 @@ This Program is used mysql client library if you are using Ubuntu apt-get instal
 
 
 #Usage
-Download and run make file output produced mysqljson
-
+Download and run make file 
+run your program ./mysqlJson

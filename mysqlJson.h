@@ -15,7 +15,6 @@ struct connection_details
     char *user;
     char *password;
     char *database;
-
 };
 
 MYSQL* mysql_connection_setup(struct connection_details mysql_details);
